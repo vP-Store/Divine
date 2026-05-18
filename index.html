@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Manifest &amp; Divine Timing — Journal 2026</title>
+
+<!-- PWA Meta Tags -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1A1714">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Journal 2026">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="application-name" content="Journal 2026">
+<meta name="msapplication-TileColor" content="#1A1714">
+<meta name="msapplication-TileImage" content="icons/icon-144.png">
+
+<!-- Apple Touch Icons -->
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152.png">
+<link rel="apple-touch-icon" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" sizes="512x512" href="icons/icon-512.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#C9A96E;--cream:#FAF7F2;--dark:#1A1714;--dark2:#232018;--dark3:#2D2820;--border:rgba(201,169,110,0.22);--border-s:rgba(201,169,110,0.45);--muted:rgba(250,247,242,0.45);--dim:rgba(250,247,242,0.22);--sb:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:var(--dark);color:var(--cream);font-family:'Jost',sans-serif;font-weight:300;min-height:100dvh;overflow-x:hidden;font-size:16px;-webkit-font-smoothing:antialiased}
+
+/* ─── BOTTOM NAV ─── */
+.bnav{position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(18,15,12,0.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--border);display:flex;align-items:stretch;padding-bottom:var(--sb);height:calc(58px + var(--sb))}
+.ni{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;padding:8px 2px;border:none;background:none;color:var(--muted);-webkit-appearance:none;transition:color .15s}
+.ni.active{color:var(--gold)}
+.ni:active{opacity:.65}
+.ni-icon{font-size:17px;line-height:1}
+.ni-lbl{font-size:8.5px;letter-spacing:.07em;text-transform:uppercase;font-family:'Jost',sans-serif;font-weight:400;white-space:nowrap}
+
+/* ─── SECTIONS ─── */
+.sec{display:none;min-height:100dvh;padding-bottom:calc(58px + var(--sb) + 20px)}
+.sec.active{display:block}
+#cover{display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:44px 22px calc(78px + var(--sb));min-height:100dvh;position:relative;overflow:hidden}
+#cover.active{display:flex}
+
+/* ─── COVER ─── */
+.c-glow{position:absolute;top:18%;left:50%;transform:translateX(-50%);width:260px;height:260px;background:radial-gradient(circle,rgba(201,169,110,.09) 0%,transparent 70%);pointer-events:none}
+.c-stars{position:absolute;inset:0;background-image:radial-gradient(1.5px 1.5px at 14% 18%,rgba(201,169,110,.7) 0%,transparent 100%),radial-gradient(1px 1px at 84% 14%,rgba(201,169,110,.5) 0%,transparent 100%),radial-gradient(1.5px 1.5px at 72% 76%,rgba(232,213,176,.6) 0%,transparent 100%),radial-gradient(1px 1px at 8% 64%,rgba(201,169,110,.4) 0%,transparent 100%),radial-gradient(1px 1px at 92% 46%,rgba(201,169,110,.5) 0%,transparent 100%),radial-gradient(1.5px 1.5px at 42% 9%,rgba(232,213,176,.8) 0%,transparent 100%),radial-gradient(1px 1px at 56% 89%,rgba(201,169,110,.4) 0%,transparent 100%),radial-gradient(1.5px 1.5px at 77% 31%,rgba(232,213,176,.5) 0%,transparent 100%);pointer-events:none}
+.c-moon{width:120px;height:120px;border-radius:50%;border:1px solid var(--border-s);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;position:relative;flex-shrink:0}
+.c-moon::before{content:'';position:absolute;inset:10px;border-radius:50%;border:1px solid var(--border)}
+.moon-sym{font-size:2.8rem;color:var(--gold);opacity:.85}
+.c-eye{font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.c-title{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;line-height:1.1;color:var(--cream);margin-bottom:5px}
+.c-title em{font-style:italic;color:var(--gold)}
+.c-sub{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:var(--muted);margin-bottom:24px}
+.c-line{width:70px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 auto 24px}
+.c-feats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:100%;max-width:310px;margin:0 auto 28px}
+.c-feat{display:flex;flex-direction:column;align-items:center;gap:5px}
+.c-feat-i{font-size:1.2rem}
+.c-feat-t{font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);text-align:center;line-height:1.4}
+.c-cta{border:1px solid var(--gold);color:var(--gold);background:transparent;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;padding:13px 32px;cursor:pointer;-webkit-appearance:none;border-radius:0;transition:all .2s}
+.c-cta:active{background:var(--gold);color:var(--dark)}
+
+/* ─── SHARED PAGE ─── */
+.pw{padding:22px 18px}
+.ph{text-align:center;padding-bottom:22px;border-bottom:1px solid var(--border);margin-bottom:24px}
+.slbl{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:9px}
+.ptitle{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:300;color:var(--cream);line-height:1.2;margin-bottom:9px}
+.ptitle em{font-style:italic;color:var(--gold)}
+.pdesc{font-size:13px;color:var(--muted);line-height:1.65}
+.divider{border:none;border-top:1px solid var(--border);margin:22px 0}
+.tm{color:var(--muted);font-size:12px;line-height:1.65}
+.gold{color:var(--gold)}
+
+/* ─── CARD ─── */
+.card{background:var(--dark2);border:1px solid var(--border);padding:16px;margin-bottom:10px}
+.card-line::before{content:'';display:block;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:-16px -16px 14px}
+
+/* ─── FIELDS ─── */
+.fl{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:7px}
+.fi,.fta{width:100%;background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--cream);font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;font-weight:300;padding:7px 0;outline:none;-webkit-appearance:none;border-radius:0}
+.fta{resize:none;line-height:1.65}
+.fi::placeholder,.fta::placeholder{color:var(--dim)}
+.fi:focus,.fta:focus{border-bottom-color:var(--gold)}
+.fb{width:100%;background:rgba(201,169,110,.03);border:1px solid var(--border);color:var(--cream);font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;font-weight:300;padding:11px 13px;outline:none;resize:none;-webkit-appearance:none;border-radius:0;line-height:1.65}
+.fb::placeholder{color:var(--dim)}
+.fb:focus{border-color:var(--gold)}
+.fg{margin-bottom:16px}
+
+/* ─── PILL ─── */
+.pill{display:inline-block;font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;border:1px solid var(--border-s);color:var(--gold);padding:2px 7px;margin:3px 3px 0 0}
+
+/* ─── TABS ─── */
+.tabs{display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;border-bottom:1px solid var(--border);margin-bottom:20px}
+.tabs::-webkit-scrollbar{display:none}
+.tbtn{flex-shrink:0;font-family:'Jost',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:11px 15px;cursor:pointer;color:var(--muted);border:none;border-bottom:2px solid transparent;background:none;white-space:nowrap;-webkit-appearance:none;transition:color .15s}
+.tbtn.active{color:var(--gold);border-bottom-color:var(--gold)}
+.tpane{display:none}
+.tpane.active{display:block}
+.scroll-hint{text-align:center;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);padding:10px 0 4px}
+
+/* ─── ACCORDION ─── */
+.acc-item{border:1px solid var(--border);margin-bottom:8px;background:var(--dark2);overflow:hidden}
+.acc-hd{display:flex;align-items:center;justify-content:space-between;padding:15px 16px;cursor:pointer;user-select:none;gap:10px}
+.acc-title{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:300;color:var(--cream);flex:1}
+.acc-meta{display:flex;align-items:center;gap:7px;flex-shrink:0}
+.acc-badge{font-size:8.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--gold);border:1px solid var(--border-s);padding:2px 6px;white-space:nowrap}
+.acc-chev{font-size:11px;color:var(--muted);transition:transform .2s;flex-shrink:0}
+.acc-hd.open .acc-chev{transform:rotate(180deg)}
+.acc-body{display:none;padding:0 16px 16px;border-top:1px solid var(--border)}
+.acc-body.open{display:block}
+.acc-moon{font-size:10.5px;color:rgba(201,169,110,.55);margin:10px 0 5px;line-height:1.5}
+.acc-theme{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:14px}
+
+/* ─── VISION ─── */
+.vgrid{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:18px}
+.vcell{background:var(--dark2);padding:13px 15px}
+.vcell-lbl{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.vcell textarea{width:100%;background:transparent;border:none;outline:none;color:var(--cream);font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;font-weight:300;line-height:1.6;resize:none;min-height:50px;-webkit-appearance:none}
+.vcell textarea::placeholder{color:var(--dim)}
+
+/* ─── MOON CARDS ─── */
+.moon-card{background:var(--dark2);border:1px solid var(--border);padding:15px;margin-bottom:9px}
+.mc-top{display:flex;align-items:flex-start;gap:11px;margin-bottom:9px}
+.mc-emoji{font-size:1.5rem;flex-shrink:0;line-height:1.2}
+.mc-name{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:300;color:var(--cream);margin-bottom:2px}
+.mc-date{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.mc-desc{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:9px}
+
+/* ─── PHASE GRID ─── */
+.pgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-bottom:20px}
+.pcell{background:var(--dark2);border:1px solid var(--border);padding:13px 11px}
+.pe{font-size:1.3rem;margin-bottom:5px;display:block}
+.pname{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:var(--cream);margin-bottom:2px}
+.psub{font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.pdesc{font-size:11px;color:var(--muted);line-height:1.5}
+
+/* ─── RITUAL ─── */
+.rcard{background:var(--dark2);border:1px solid var(--border);padding:15px;margin-bottom:9px;position:relative;overflow:hidden}
+.rcard::before{content:'';display:block;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:-15px -15px 13px}
+.rtop{display:flex;align-items:center;gap:11px;margin-bottom:9px}
+.ri{font-size:1.4rem;flex-shrink:0}
+.rname{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--cream);margin-bottom:2px}
+.rcat{font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.rdesc{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:11px}
+.rsteps{display:flex;flex-direction:column;gap:5px}
+.rstep{display:flex;gap:7px;font-size:12px;color:var(--muted);line-height:1.5}
+.rb{color:var(--gold);flex-shrink:0;margin-top:2px}
+
+/* ─── PROMPTS ─── */
+.prompt-item{padding:15px 0;border-bottom:1px solid var(--border)}
+.pq{display:flex;gap:11px;align-items:flex-start;margin-bottom:9px}
+.pnum{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:rgba(201,169,110,.3);line-height:1.1;flex-shrink:0;min-width:26px}
+.ptxt{font-family:'Cormorant Garamond',serif;font-size:.98rem;font-style:italic;color:var(--cream);line-height:1.6}
+
+/* ─── TRACKER ─── */
+.hrow{display:flex;align-items:flex-start;gap:10px;padding:11px 0;border-bottom:1px solid rgba(201,169,110,.09)}
+.hname{font-size:13px;color:var(--cream);flex-shrink:0;width:110px;padding-top:3px}
+.hdots{display:flex;gap:5px;flex-wrap:wrap;flex:1}
+.dot{width:22px;height:22px;border-radius:50%;border:1px solid var(--border-s);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:10px;color:transparent;transition:all .15s;flex-shrink:0}
+.dot.done{background:var(--gold);border-color:var(--gold);color:var(--dark)}
+.dot:active:not(.done){border-color:var(--gold);transform:scale(.88)}
+
+/* ─── GRATITUDE ─── */
+.gday{background:var(--dark2);border:1px solid var(--border);padding:15px;margin-bottom:9px}
+.gday-hd{display:flex;align-items:center;gap:9px;margin-bottom:11px}
+.gday-n{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:rgba(201,169,110,.32);line-height:1}
+.gday-l{font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--gold)}
+.gentries{display:flex;flex-direction:column;gap:9px}
+.gentry{display:flex;align-items:center;gap:9px}
+.gbullet{color:var(--gold);font-size:9px;flex-shrink:0}
+.ginput{flex:1;background:transparent;border:none;border-bottom:1px solid rgba(201,169,110,.1);color:var(--cream);font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;padding:4px 0;outline:none;-webkit-appearance:none}
+.ginput::placeholder{color:var(--dim)}
+.ginput:focus{border-bottom-color:var(--gold)}
+
+/* ─── AFFIRMATIONS ─── */
+.acard{background:var(--dark2);border:1px solid var(--border);padding:16px;margin-bottom:9px}
+.atxt{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:var(--cream);line-height:1.6;margin-bottom:7px}
+.aarea{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+
+/* ─── 3-6-9 ─── */
+.mgrid{display:flex;flex-direction:column;gap:1px;background:var(--border);margin:14px 0}
+.mcell{background:var(--dark2);padding:14px;display:flex;align-items:center;gap:13px}
+.mnum{font-family:'Cormorant Garamond',serif;font-size:2.2rem;color:var(--gold);opacity:.45;line-height:1;flex-shrink:0;width:38px;text-align:center}
+.mlbl{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:3px}
+.mdesc{font-size:11.5px;color:var(--muted);line-height:1.5}
+
+/* ─── ORACLE ─── */
+.ocard{background:var(--dark2);border:1px solid var(--border);padding:30px 18px;text-align:center;cursor:pointer;margin-bottom:14px;position:relative;overflow:hidden}
+.ocard::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(201,169,110,.05),transparent 70%);pointer-events:none}
+.osym{font-size:2.4rem;display:block;margin-bottom:14px;color:var(--gold)}
+.omsg{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--cream);line-height:1.7;margin-bottom:12px}
+.ohint{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(201,169,110,.5)}
+
+/* ─── QUOTE ─── */
+.qbox{background:var(--dark2);border:1px solid var(--border);padding:22px 18px;text-align:center;margin-bottom:18px}
+.qtxt{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:var(--cream);line-height:1.7;margin-bottom:9px}
+.qsrc{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+
+/* ─── CRYSTAL GRID ─── */
+.crgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-bottom:18px}
+.crcard{background:var(--dark2);border:1px solid var(--border);padding:13px 11px;text-align:center}
+.cricon{font-size:1.3rem;display:block;margin-bottom:5px}
+.crname{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:var(--cream);margin-bottom:3px}
+.crdesc{font-size:11px;color:var(--muted);line-height:1.5}
+
+.mt8{margin-top:8px}.mt14{margin-top:14px}.mb10{margin-bottom:10px}.mb18{margin-bottom:18px}
+
+/* ─── PWA INSTALL BANNER ─── */
+#installBanner{position:fixed;top:0;left:0;right:0;z-index:999;background:var(--dark2);border-bottom:1px solid var(--border-s);padding:12px 16px;display:none;align-items:center;gap:12px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+#installBanner.show{display:flex}
+.ib-icon{font-size:1.6rem;flex-shrink:0}
+.ib-text{flex:1}
+.ib-title{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:var(--cream);margin-bottom:1px}
+.ib-sub{font-size:10px;color:var(--muted);letter-spacing:.05em}
+.ib-btn{border:1px solid var(--gold);color:var(--gold);background:transparent;font-family:'Jost',sans-serif;font-size:10px;letter-spacing:.15em;text-transform:uppercase;padding:7px 14px;cursor:pointer;-webkit-appearance:none;border-radius:0;flex-shrink:0;white-space:nowrap}
+.ib-btn:active{background:var(--gold);color:var(--dark)}
+.ib-close{color:var(--muted);background:none;border:none;font-size:16px;cursor:pointer;padding:4px;flex-shrink:0;-webkit-appearance:none}
+/* Push content down when banner visible */
+body.banner-open .sec{padding-top:64px}
+body.banner-open #cover{padding-top:104px}
+
+</style>
+</head>
+<body>
+<!-- PWA Install Banner -->
+<div id="installBanner">
+  <span class="ib-icon">☽</span>
+  <div class="ib-text">
+    <div class="ib-title">App installieren</div>
+    <div class="ib-sub">Zum Homescreen hinzufügen — offline verfügbar</div>
+  </div>
+  <button class="ib-btn" onclick="installApp()">Installieren</button>
+  <button class="ib-close" onclick="closeBanner()" aria-label="Schließen">✕</button>
+</div>
+
+
+<!-- BOTTOM NAV -->
+<nav class="bnav">
+  <button class="ni active" id="nav-cover" onclick="go('cover')"><span class="ni-icon">✦</span><span class="ni-lbl">Start</span></button>
+  <button class="ni" id="nav-vision" onclick="go('vision')"><span class="ni-icon">🌟</span><span class="ni-lbl">Vision</span></button>
+  <button class="ni" id="nav-lunar" onclick="go('lunar')"><span class="ni-icon">🌙</span><span class="ni-lbl">Mond</span></button>
+  <button class="ni" id="nav-intentions" onclick="go('intentions')"><span class="ni-icon">📅</span><span class="ni-lbl">Monate</span></button>
+  <button class="ni" id="nav-prompts" onclick="go('prompts')"><span class="ni-icon">✍️</span><span class="ni-lbl">Journal</span></button>
+  <button class="ni" id="nav-rituals" onclick="go('rituals')"><span class="ni-icon">🕯️</span><span class="ni-lbl">Rituale</span></button>
+  <button class="ni" id="nav-tracker" onclick="go('tracker')"><span class="ni-icon">🌿</span><span class="ni-lbl">Tracker</span></button>
+  <button class="ni" id="nav-oracle" onclick="go('oracle')"><span class="ni-icon">🔮</span><span class="ni-lbl">Orakel</span></button>
+</nav>
+
+<!-- COVER -->
+<section id="cover" class="sec active">
+  <div class="c-glow"></div><div class="c-stars"></div>
+  <div class="c-moon"><span class="moon-sym">☽</span></div>
+  <p class="c-eye">✦ Ein heiliges digitales Journal ✦</p>
+  <h1 class="c-title">Manifest &amp; <em>Divine Timing</em></h1>
+  <p class="c-sub">Guided Journal 2026</p>
+  <div class="c-line"></div>
+  <div class="c-feats">
+    <div class="c-feat"><span class="c-feat-i">🌑</span><span class="c-feat-t">Mondphasen &amp; Rituale</span></div>
+    <div class="c-feat"><span class="c-feat-i">✍️</span><span class="c-feat-t">Journal-Prompts</span></div>
+    <div class="c-feat"><span class="c-feat-i">♾️</span><span class="c-feat-t">3-6-9 Methode</span></div>
+    <div class="c-feat"><span class="c-feat-i">📅</span><span class="c-feat-t">12 Monats&shy;intentionen</span></div>
+    <div class="c-feat"><span class="c-feat-i">🔮</span><span class="c-feat-t">Tägliches Orakel</span></div>
+    <div class="c-feat"><span class="c-feat-i">🌿</span><span class="c-feat-t">Habit Tracker</span></div>
+  </div>
+  <button class="c-cta" onclick="go('vision')">Journal öffnen ✦</button>
+</section>
+
+<!-- VISION -->
+<section id="vision" class="sec">
+  <div class="pw">
+    <div class="ph"><span class="slbl">✦ Beginn deiner Reise</span><h1 class="ptitle">Mein <em>Vision Board</em> 2026</h1><p class="pdesc">Definiere deine Vision — in Worten, Gefühlen und Träumen. Das Universum hört jene am deutlichsten, die wissen, was sie erschaffen wollen.</p></div>
+    <div class="qbox"><p class="qtxt">„Du musst nicht wissen, wie es geschehen wird. Du musst nur wissen, was du möchtest — und dem Universum vertrauen."</p><span class="qsrc">✦ Divine Timing ✦</span></div>
+    <span class="slbl">✦ Meine 9 Lebensbereiche 2026</span>
+    <div class="vgrid" id="vgrid">
+      <div class="vcell"><div class="vcell-lbl">❤️ Liebe &amp; Beziehungen</div><textarea placeholder="Ich ziehe tiefe, liebevolle Verbindungen an…" rows="3"></textarea></div>
+      <div class="vcell"><div class="vcell-lbl">💰 Wohlstand &amp; Finanzen</div><textarea placeholder="Geld fließt leicht und reichlich…" rows="3"></textarea></div>
+      <div class="vcell"><div class="vcell-lbl">✨ Karriere &amp; Purpose</div><textarea placeholder="Meine Arbeit erfüllt mich, weil…" rows="3"></textarea></div>
+      <div class="vcell"><div class="vcell-lbl">🌿 Gesundheit &amp; Körper</div><textarea placeholder="Mein Körper ist stark und vital…" rows="3"></textarea></div>
+      <div class="vcell"><div class="vcell-lbl">🏡 Zuhause &amp; Umgebung</div><textarea placeholder="Ich lebe in einem Raum, der sich anfühlt wie…" rows="3"></textarea></div>
+      <div class="vcell"><div class="vcell-lbl">🌱 Persönliches Wachstum</div><textarea placeholder="Ich entwickle mich in Richtung…" rows="3"></textarea></div>
+      <div class="vcell"><div class="vcell-lbl">🔮 Spiritualität</div><textarea placeholder="Meine spirituelle Praxis beinhaltet…" rows="3"></textarea></div>
+      <div class="vcell"><div class="vcell-lbl">🎨 Kreativität &amp; Freude</div><textarea placeholder="Ich erlaube mir, kreativ zu sein durch…" rows="3"></textarea></div>
+      <div class="vcell"><div class="vcell-lbl">🌍 Reisen &amp; Abenteuer</div><textarea placeholder="In 2026 erlebe ich…" rows="3"></textarea></div>
+    </div>
+    <hr class="divider">
+    <span class="slbl">✦ Mein Jahres-Kernwort</span>
+    <div class="card mt8">
+      <p class="tm mb10">Ein einziges Wort trägt die Energie des gesamten Jahres.</p>
+      <div class="fg"><label class="fl">Mein Kernwort 2026</label><input type="text" class="fi" placeholder="z.B. Expansion · Vertrauen · Fluss…" style="font-size:1.3rem;text-align:center"></div>
+      <div class="fg"><label class="fl">Warum dieses Wort?</label><textarea class="fta" rows="3" placeholder="Dieses Wort wähle ich, weil…"></textarea></div>
+    </div>
+    <hr class="divider">
+    <span class="slbl">✦ Brief an mein zukünftiges Ich</span>
+    <div class="card mt8">
+      <p class="tm mb10">Schreibe an die Version von dir am 31. Dezember 2026.</p>
+      <div class="fg"><label class="fl">Liebe/r [dein Name] im Dezember 2026,</label><textarea class="fb" rows="8" placeholder="Ich schreibe dir aus dem Januar 2026, voller Hoffnung und Vertrauen…"></textarea></div>
+    </div>
+  </div>
+</section>
+
+<!-- LUNAR -->
+<section id="lunar" class="sec">
+  <div class="pw">
+    <div class="ph"><span class="slbl">✦ Kosmische Ausrichtung</span><h1 class="ptitle"><em>Mondkalender</em> 2026</h1><p class="pdesc">2026 hat <strong class="gold">13 Vollmonde</strong> — ein seltenes, kraftvolles Jahr. 4 Supermonde, 2 Mikromonde, 1 Mondfinsternis &amp; ein Blue Moon.</p></div>
+    <span class="slbl">✦ Die 8 Mondphasen</span>
+    <div class="pgrid">
+      <div class="pcell"><span class="pe">🌑</span><div class="pname">Neumond</div><div class="psub">Neue Anfänge</div><p class="pdesc">Setze Intentionen. Pflanze Samen. Stille und Beginn.</p></div>
+      <div class="pcell"><span class="pe">🌒</span><div class="pname">Zunehmende Sichel</div><div class="psub">Wachstum</div><p class="pdesc">Handle. Zeige dem Universum deine Bereitschaft.</p></div>
+      <div class="pcell"><span class="pe">🌓</span><div class="pname">Erstes Viertel</div><div class="psub">Entscheidung</div><p class="pdesc">Überwinde Widerstände. Triff Entscheidungen mutig.</p></div>
+      <div class="pcell"><span class="pe">🌔</span><div class="pname">Zunehmender Gibbus</div><div class="psub">Verfeinerung</div><p class="pdesc">Gehe tiefer. Du bist nah am Ziel.</p></div>
+      <div class="pcell"><span class="pe">🌕</span><div class="pname">Vollmond</div><div class="psub">Erfüllung &amp; Release</div><p class="pdesc">Feiere. Lass los, was nicht mehr dient.</p></div>
+      <div class="pcell"><span class="pe">🌖</span><div class="pname">Abnehmender Gibbus</div><div class="psub">Dankbarkeit</div><p class="pdesc">Erntezeit. Teile deine Weisheit.</p></div>
+      <div class="pcell"><span class="pe">🌗</span><div class="pname">Letztes Viertel</div><div class="psub">Loslassen</div><p class="pdesc">Lass Altes los. Schaffe Raum für Neues.</p></div>
+      <div class="pcell"><span class="pe">🌘</span><div class="pname">Abnehmende Sichel</div><div class="psub">Ruhe &amp; Rückzug</div><p class="pdesc">Ruhe. Reflektiere. Vorbereitung auf neuen Zyklus.</p></div>
+    </div>
+    <hr class="divider">
+    <span class="slbl">✦ Alle 13 Vollmonde 2026</span>
+    <div id="moonList"></div>
+    <hr class="divider">
+    <span class="slbl">✦ Mein Mondphasen-Journal</span>
+    <div class="card card-line mt8">
+      <p class="fl">🌑 Neumond Intention</p>
+      <div class="fg"><label class="fl">Datum &amp; Mondzeichen</label><input type="text" class="fi" placeholder="z.B. 7. Feb · Wassermann"></div>
+      <div class="fg"><label class="fl">Meine Intention für diesen Zyklus</label><textarea class="fta" rows="3" placeholder="Ich beabsichtige…"></textarea></div>
+    </div>
+    <div class="card card-line">
+      <p class="fl">🌕 Vollmond Release</p>
+      <div class="fg"><label class="fl">Datum &amp; Mondzeichen</label><input type="text" class="fi" placeholder="z.B. 22. Feb · Jungfrau"></div>
+      <div class="fg"><label class="fl">Was ich loslasse</label><textarea class="fta" rows="3" placeholder="Ich lasse los…"></textarea></div>
+    </div>
+  </div>
+</section>
+
+<!-- INTENTIONS -->
+<section id="intentions" class="sec">
+  <div class="pw">
+    <div class="ph"><span class="slbl">✦ Monat für Monat</span><h1 class="ptitle">12 Monatliche <em>Intentionen</em></h1><p class="pdesc">Richte deine Absichten am kosmischen Rhythmus aus — und beobachte, wie das Universum antwortet.</p></div>
+    <div id="intentionList"></div>
+  </div>
+</section>
+
+<!-- PROMPTS -->
+<section id="prompts" class="sec">
+  <div class="pw">
+    <div class="ph"><span class="slbl">✦ Tiefes Reflektieren</span><h1 class="ptitle">Geführte <em>Journal-Prompts</em></h1><p class="pdesc">Diese Fragen sind Schlüssel — gestaltet, um Türen in dir zu öffnen.</p></div>
+    <div class="scroll-hint">← wische für mehr Kategorien →</div>
+    <div class="tabs">
+      <button class="tbtn active" onclick="st('pm',this)">Manifestation</button>
+      <button class="tbtn" onclick="st('pd',this)">Divine Timing</button>
+      <button class="tbtn" onclick="st('ps',this)">Shadow Work</button>
+      <button class="tbtn" onclick="st('pg',this)">Dankbarkeit</button>
+      <button class="tbtn" onclick="st('pi',this)">Identität</button>
+      <button class="tbtn" onclick="st('pr',this)">Loslassen</button>
+    </div>
+    <div id="pm" class="tpane active"><div id="pml"></div></div>
+    <div id="pd" class="tpane"><div id="pdl"></div></div>
+    <div id="ps" class="tpane"><div id="psl"></div></div>
+    <div id="pg" class="tpane"><div id="pgl"></div></div>
+    <div id="pi" class="tpane"><div id="pil"></div></div>
+    <div id="pr" class="tpane"><div id="prl"></div></div>
+    <hr class="divider">
+    <span class="slbl">✦ 3-6-9 Manifestationsmethode</span>
+    <div class="card mt8">
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--gold);margin-bottom:5px">Die Tesla-Methode · 3·6·9</p>
+      <p class="tm mb14">Schreibe deine Manifestation 3× morgens, 6× nachmittags, 9× abends — für 33 Tage.</p>
+      <div class="mgrid">
+        <div class="mcell"><div class="mnum">3</div><div><div class="mlbl">× Morgens</div><p class="mdesc">Im Zustand des Erwachens — Geist am empfänglichsten</p></div></div>
+        <div class="mcell"><div class="mnum">6</div><div><div class="mlbl">× Nachmittags</div><p class="mdesc">Energie erneuern und Intention verankern</p></div></div>
+        <div class="mcell"><div class="mnum">9</div><div><div class="mlbl">× Abends</div><p class="mdesc">Unterbewusstsein arbeitet die ganze Nacht</p></div></div>
+      </div>
+      <div class="fg"><label class="fl">Meine Manifestation (Präsens — als wäre es bereits wahr)</label><textarea class="fb" rows="4" placeholder="Ich bin so dankbar und glücklich, dass ich jetzt [Wunsch]… Ich fühle [Emotion], weil ich [Resultat] erlebe."></textarea></div>
+    </div>
+  </div>
+</section>
+
+<!-- RITUALS -->
+<section id="rituals" class="sec">
+  <div class="pw">
+    <div class="ph"><span class="slbl">✦ Heilige Praktiken</span><h1 class="ptitle">Rituale &amp; <em>Praktiken</em></h1><p class="pdesc">Rituale sind Brücken zwischen deiner menschlichen und göttlichen Natur.</p></div>
+    <div class="scroll-hint">← wische für mehr →</div>
+    <div class="tabs">
+      <button class="tbtn active" onclick="st('rm',this)">Morgenroutine</button>
+      <button class="tbtn" onclick="st('rn',this)">Neumond</button>
+      <button class="tbtn" onclick="st('rf',this)">Vollmond</button>
+      <button class="tbtn" onclick="st('rc',this)">Kristalle</button>
+    </div>
+    <div id="rm" class="tpane active">
+      <div class="rcard"><div class="rtop"><div class="ri">🌅</div><div><div class="rname">Stilles Erwachen</div><div class="rcat">Tägliche Praxis</div></div></div><p class="rdesc">Beginne den Tag in Stille, bevor du dein Handy berührst oder die Welt einlässt.</p><div class="rsteps"><div class="rstep"><span class="rb">◦</span>5 Atemzüge bewusst setzen</div><div class="rstep"><span class="rb">◦</span>Gefühl des Tages wählen</div><div class="rstep"><span class="rb">◦</span>1 Intention laut aussprechen</div><div class="rstep"><span class="rb">◦</span>Dankbarkeit aussprechen</div></div></div>
+      <div class="rcard"><div class="rtop"><div class="ri">✍️</div><div><div class="rname">Morning Pages</div><div class="rcat">Tägliche Praxis</div></div></div><p class="rdesc">3 Seiten ununterbrochenes Schreiben — ohne Filter, ohne Ziel. Bewusstseinsstrom fließen lassen.</p><div class="rsteps"><div class="rstep"><span class="rb">◦</span>Kein Thema nötig — einfach fließen</div><div class="rstep"><span class="rb">◦</span>Stift nicht absetzen</div><div class="rstep"><span class="rb">◦</span>Nicht redigieren oder lesen</div><div class="rstep"><span class="rb">◦</span>15–20 Minuten täglich</div></div></div>
+      <div class="rcard"><div class="rtop"><div class="ri">🔮</div><div><div class="rname">Tarot / Orakel</div><div class="rcat">Tägliche Praxis</div></div></div><p class="rdesc">Ziehe eine Karte als Spiegel für die Energie des Tages — nicht als Vorhersage, sondern als Einladung.</p><div class="rsteps"><div class="rstep"><span class="rb">◦</span>Frage: Was soll ich heute sehen?</div><div class="rstep"><span class="rb">◦</span>Karte meditativ betrachten</div><div class="rstep"><span class="rb">◦</span>3 Schlüsselworte notieren</div><div class="rstep"><span class="rb">◦</span>Abends reflektieren</div></div></div>
+    </div>
+    <div id="rn" class="tpane">
+      <div class="rcard"><div class="rtop"><div class="ri">🕯️</div><div><div class="rname">Heiliger Raum</div><div class="rcat">Neumond-Ritual</div></div></div><p class="rdesc">Bereite einen Altar vor, zünde eine weiße Kerze an und reinige den Raum mit Räucherstäbchen oder Klang.</p><div class="rsteps"><div class="rstep"><span class="rb">◦</span>Raum reinigen (Salbei / Klang)</div><div class="rstep"><span class="rb">◦</span>Kristalle auf dem Altar platzieren</div><div class="rstep"><span class="rb">◦</span>Weiße Kerze entzünden</div><div class="rstep"><span class="rb">◦</span>3 Atemzüge zur Stille kommen</div></div></div>
+      <div class="rcard"><div class="rtop"><div class="ri">📜</div><div><div class="rname">Intentions-Brief</div><div class="rcat">Neumond-Ritual</div></div></div><p class="rdesc">Schreibe deine Intentionen auf Papier als wären sie bereits wahr. Am Vollmond öffnen.</p><div class="rsteps"><div class="rstep"><span class="rb">◦</span>Im Präsens schreiben</div><div class="rstep"><span class="rb">◦</span>Gefühl der Erfüllung erspüren</div><div class="rstep"><span class="rb">◦</span>Unterschreiben und versiegeln</div><div class="rstep"><span class="rb">◦</span>Am Vollmond öffnen &amp; feiern</div></div></div>
+      <div class="rcard"><div class="rtop"><div class="ri">💎</div><div><div class="rname">Kristall-Ladung</div><div class="rcat">Neumond-Ritual</div></div></div><p class="rdesc">Reinige und lade deine Kristalle. Programmiere sie mit deiner Intention für den Mondzyklus.</p><div class="rsteps"><div class="rstep"><span class="rb">◦</span>Mondwasser zubereiten</div><div class="rstep"><span class="rb">◦</span>Kristalle auflegen &amp; aktivieren</div><div class="rstep"><span class="rb">◦</span>Intention einsprechen</div><div class="rstep"><span class="rb">◦</span>Über Nacht draußen lassen</div></div></div>
+    </div>
+    <div id="rf" class="tpane">
+      <div class="rcard"><div class="rtop"><div class="ri">🔥</div><div><div class="rname">Verbrennungsritual</div><div class="rcat">Vollmond-Ritual</div></div></div><p class="rdesc">Schreibe alles auf, was du loslassen möchtest. Verbrenne es sicher als symbolischen Akt der Befreiung.</p><div class="rsteps"><div class="rstep"><span class="rb">◦</span>Alles aufschreiben, was weg darf</div><div class="rstep"><span class="rb">◦</span>Laut lesen und vollständig fühlen</div><div class="rstep"><span class="rb">◦</span>Sicher verbrennen</div><div class="rstep"><span class="rb">◦</span>Asche der Erde zurückgeben</div></div></div>
+      <div class="rcard"><div class="rtop"><div class="ri">🛁</div><div><div class="rname">Vollmond-Bad</div><div class="rcat">Vollmond-Ritual</div></div></div><p class="rdesc">Ein rituelles Bad zur energetischen Reinigung — mit Meersalz, Rosenblättern und ätherischen Ölen.</p><div class="rsteps"><div class="rstep"><span class="rb">◦</span>2 Tassen Meersalz ins Wasser</div><div class="rstep"><span class="rb">◦</span>Rosenblätter oder Lavendel</div><div class="rstep"><span class="rb">◦</span>Intention beim Eintauchen setzen</div><div class="rstep"><span class="rb">◦</span>Beim Ablaufen: alles loslassen</div></div></div>
+      <div class="rcard"><div class="rtop"><div class="ri">🌊</div><div><div class="rname">Mondwasser-Zeremonie</div><div class="rcat">Vollmond-Ritual</div></div></div><p class="rdesc">Stelle Wasser über Nacht unter den Vollmond. Morgens mit Dankbarkeit trinken.</p><div class="rsteps"><div class="rstep"><span class="rb">◦</span>Glas oder Schüssel vorbereiten</div><div class="rstep"><span class="rb">◦</span>Intention einsprechen</div><div class="rstep"><span class="rb">◦</span>Über Nacht unter den Mond stellen</div><div class="rstep"><span class="rb">◦</span>Morgens mit Dankbarkeit trinken</div></div></div>
+    </div>
+    <div id="rc" class="tpane">
+      <p class="tm mb18">Kristalle sind Natur-Energieverstärker. Du brauchst nicht viele — nur jene, die zu deiner Reise passen.</p>
+      <div class="crgrid">
+        <div class="crcard"><span class="cricon">🪨</span><div class="crname">Amethyst</div><p class="crdesc">Spirituelle Klarheit, Intuition, Schutz. Ideal für Meditation.</p></div>
+        <div class="crcard"><span class="cricon">🌙</span><div class="crname">Mondstein</div><p class="crdesc">Göttliche Feminine, Mondzyklen, Intuition und neue Anfänge.</p></div>
+        <div class="crcard"><span class="cricon">🌹</span><div class="crname">Rosenquarz</div><p class="crdesc">Selbstliebe, Herzenserneuerung, Anziehungskraft für Liebe.</p></div>
+        <div class="crcard"><span class="cricon">⬛</span><div class="crname">Schwarzer Obsidian</div><p class="crdesc">Schutz, Shadow Work und Erdung bei Transformation.</p></div>
+        <div class="crcard"><span class="cricon">🔮</span><div class="crname">Bergkristall</div><p class="crdesc">Verstärker für alle Steine. Klarheit und Licht in jede Intention.</p></div>
+        <div class="crcard"><span class="cricon">💛</span><div class="crname">Citrin</div><p class="crdesc">Manifestation, Abundanz und Freude. Stein des Überflusses.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRACKER -->
+<section id="tracker" class="sec">
+  <div class="pw">
+    <div class="ph"><span class="slbl">✦ Fortschritt &amp; Ausrichtung</span><h1 class="ptitle"><em>Tracker</em> &amp; Dankbarkeit</h1><p class="pdesc">Was du täglich tust, formt, was du wirst. Tracke mit Freude — nicht mit Strenge.</p></div>
+    <div class="scroll-hint">← wische für mehr Bereiche →</div>
+    <div class="tabs">
+      <button class="tbtn active" onclick="st('th',this)">Habits</button>
+      <button class="tbtn" onclick="st('tg',this)">Dankbarkeit</button>
+      <button class="tbtn" onclick="st('ta',this)">Affirmationen</button>
+    </div>
+    <div id="th" class="tpane active"><p class="tm mb18">Tippe auf einen Kreis, um einen Tag abzuhaken. Jeder Punkt ist ein Geschenk an dein zukünftiges Ich.</p><div id="habitList"></div></div>
+    <div id="tg" class="tpane"><p class="tm mb18" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem">"Dankbarkeit ist das Portal zwischen deiner Welt wie sie ist und der Welt, wie du sie dir wünschst."</p><div id="gratitudeList"></div></div>
+    <div id="ta" class="tpane"><p class="tm mb18">Wähle eine Affirmation für heute. Sage sie laut, fühle sie in deinem Körper — und glaube ihr.</p><div id="affirmationList"></div></div>
+  </div>
+</section>
+
+<!-- ORACLE -->
+<section id="oracle" class="sec">
+  <div class="pw">
+    <div class="ph"><span class="slbl">✦ Weisheit des Augenblicks</span><h1 class="ptitle">Tägliches <em>Orakel</em></h1><p class="pdesc">Tippe auf das Orakel und empfange eine Botschaft für diesen Moment. Vertraue dem, was erscheint.</p></div>
+    <div class="ocard" onclick="drawOracle()">
+      <span class="osym" id="osym">✦</span>
+      <p class="omsg" id="omsg">Berühre das Orakel, um deine Botschaft zu empfangen…</p>
+      <span class="ohint" id="ohint">✦ Tippe, um zu ziehen ✦</span>
+    </div>
+    <div id="oreflect" style="display:none">
+      <div class="card">
+        <div class="fg"><label class="fl">Was spricht diese Botschaft in mir an?</label><textarea class="fb" rows="3" placeholder="Diese Botschaft berührt mich, weil…"></textarea></div>
+        <div class="fg"><label class="fl">Welche Handlung ruft sie in mir?</label><textarea class="fb" rows="3" placeholder="Als Reaktion werde ich heute…"></textarea></div>
+      </div>
+    </div>
+    <hr class="divider">
+    <span class="slbl">✦ Shadow Work &amp; Loslassen</span>
+    <div class="card mt8">
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--cream);margin-bottom:5px">Was möchte ich loslassen?</p>
+      <p class="tm mb14">Shadow Work bedeutet, Licht auf das zu richten, was im Schatten war — damit es sich transformieren kann.</p>
+      <div class="fg"><label class="fl">Welches Muster hält mich zurück?</label><textarea class="fta" rows="3" placeholder="Ich bemerke, dass ich immer wieder…"></textarea></div>
+      <div class="fg"><label class="fl">Woher könnte es stammen?</label><textarea class="fta" rows="3" placeholder="Ich glaube, dieses Muster entstand, als…"></textarea></div>
+      <div class="fg"><label class="fl">Was wäre ohne dieses Muster möglich?</label><textarea class="fta" rows="3" placeholder="Ohne dieses Muster würde ich…"></textarea></div>
+    </div>
+    <div class="card">
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--cream);margin-bottom:5px">Mein Release-Brief</p>
+      <p class="tm mb14">Schreibe alles, was du loslassen möchtest. Ausdrucken und verbrennen als symbolischen Akt.</p>
+      <div class="fg"><label class="fl">An alles, was ich loslasse:</label><textarea class="fb" rows="7" placeholder="Ich anerkenne, dass du einmal einen Zweck hattest. Heute wähle ich, mich von dir zu befreien…"></textarea></div>
+    </div>
+    <hr class="divider">
+    <span class="slbl">✦ Jahres-Rückblick: Ende 2026</span>
+    <div class="card mt8">
+      <div class="fg"><label class="fl">Was war das Bedeutendste, das ich manifestiert habe?</label><textarea class="fta" rows="2" placeholder="Das Bedeutendste war…"></textarea></div>
+      <div class="fg"><label class="fl">Was hat mich am meisten überrascht?</label><textarea class="fta" rows="2" placeholder="Mich überraschte…"></textarea></div>
+      <div class="fg"><label class="fl">Was habe ich über mich selbst gelernt?</label><textarea class="fta" rows="2" placeholder="Ich erkannte, dass ich…"></textarea></div>
+      <div class="fg"><label class="fl">Wofür bin ich 2026 am dankbarsten?</label><textarea class="fta" rows="2" placeholder="Zutiefst dankbar bin ich für…"></textarea></div>
+    </div>
+  </div>
+</section>
+
+<script>
+const MONTHS=[{name:'Januar',sign:'Steinbock ♑',moon:'🌑 29. Dez · 🌕 13. Jan (Krebs ♋)',theme:'Fundamente legen und die Jahresvision klar definieren. Steinbocks Energie unterstützt diszipliniertes Handeln mit langem Atem.'},{name:'Februar',sign:'Wassermann ♒',moon:'🌑 27. Jan · 🌕 12. Feb (Löwe ♌)',theme:'Innoviere und denke außerhalb der Box. Befreie dich von alten Mustern. Durchbrüche sind möglich.'},{name:'März',sign:'Fische ♓',moon:'🌑 28. Feb · 🌕 Mondfinsternis 13. März (Jungfrau ♍)',theme:'Intuition und Spiritualität. Die Mondfinsternis bringt mächtige Transformation — lass los, was sich falsch anfühlt.'},{name:'April',sign:'Widder ♈',moon:'🌑 29. März · 🌕 12. April (Waage ♎)',theme:'Energie, Mut und neue Anfänge. Frühlingsbeginn bringt Lebenskraft. Starte mutig das, was du aufgeschoben hast.'},{name:'Mai',sign:'Stier ♉',moon:'🌕 Flower Moon 1. Mai · 🌕 Blue Moon 31. Mai (beide Mikromonde!)',theme:'Zwei Vollmonde — seltene Magie! Sinnlichkeit, Erde und Stabilität. Pflege, was wächst. Wage das Unmögliche.'},{name:'Juni',sign:'Zwillinge ♊',moon:'🌑 25. Mai · 🌕 29. Juni (Steinbock ♑, Mikromond)',theme:'Kommunikation und Verbindung. Teile deine Ideen. Sommersonnenwende am 21. Juni — Feier des Lichts.'},{name:'Juli',sign:'Krebs ♋',moon:'🌑 24. Juni · 🌕 Buck Moon 28. Juli (Wassermann ♒)',theme:'Zuhause, Familie und emotionale Tiefe. Kümmere dich um dein inneres Kind. Schaffe Geborgenheit in dir selbst.'},{name:'August',sign:'Löwe ♌',moon:'🌑 22. Juli · 🌕 Sturgeon Supermond 26. Aug (Fische ♓)',theme:'Erster Supermond! Kreativität und Selbstausdruck. Zeige dich. Glänze. Fülle den Raum mit deiner Einzigartigkeit.'},{name:'September',sign:'Jungfrau ♍',moon:'🌑 21. Aug · 🌕 Harvest Supermond 24. Sep (Widder ♈)',theme:'Detailarbeit und Dankbarkeit. Herbstanfang am 22. Sep — Erntezeit. Verfeinere deine Prozesse.'},{name:'Oktober',sign:'Waage ♎',moon:"🌑 20. Sep · 🌕 Hunter's Supermond 24. Okt (Stier ♉)",theme:"Balance und Shadow Work. Hunter's Moon lädt zu Ahnenverbindung ein. Wo bist du außer Balance?"},{name:'November',sign:'Skorpion ♏',moon:'🌑 20. Okt · 🌕 Beaver Supermond 22. Nov (Zwillinge ♊)',theme:'Letzter Supermond! Transformation und Tiefe. Lass alles sterben, was gestorben sein möchte.'},{name:'Dezember',sign:'Schütze ♐',moon:'🌑 19. Nov · 🌕 Cold Moon 22. Dez (Krebs ♋)',theme:'Weisheit und Vollendung. Cold Moon fällt auf die Wintersonnenwende. Reflektiere das Jahr. Würdige die Reise.'}];
+const MOONS=[{e:'🌕',n:'Wolf Moon — Januar',d:'13. Januar · Krebs ♋',t:'Tiefe Introspektion. Hör auf deine innere Stimme in stillen, dunklen Momenten.',p:['Intuition','Innere Stärke','Schutz']},{e:'🌕',n:'Snow Moon — Februar',d:'12. Februar · Löwe ♌',t:'Reinheit und Stille. Gewinne Klarheit — wer du wirklich bist, jenseits deiner Rollen.',p:['Reinheit','Identität','Mut']},{e:'🌕',n:'Worm Moon — März',d:'13. März · Jungfrau ♍ ⭐ Eclipse',t:'Mondfinsternis-Energie. Alte Muster brechen auf. Bereite dich auf tiefe Transformation vor.',p:['Transformation','Eclipse','Erneuerung']},{e:'🌕',n:'Pink Moon — April',d:'12. April · Waage ♎',t:'Erneuerung, Liebe und Schönheit. Kraftvolle Zeit für Selbstfürsorge und Herzensöffnung.',p:['Liebe','Schönheit','Balance']},{e:'🌕',n:'Flower Moon — Mai',d:'1. Mai · Skorpion ♏ (Mikromond)',t:'Fülle und das Erblühen all dessen, was gepflanzt wurde. Danke Erde und Körper.',p:['Fülle','Dankbarkeit','Ernte']},{e:'🌕',n:'Blue Moon — Mai',d:'31. Mai · Schütze ♐ (Mikromond)',t:'Zwei Vollmonde in einem Monat — seltene Magie! Wage das Unmögliche und träume groß.',p:['Seltene Magie','Wunder','Kühnheit']},{e:'🌕',n:'Strawberry Moon — Juni',d:'29. Juni · Steinbock ♑ (Mikromond)',t:'Süße Früchte, die Ausdauer bringt. Ehre deine Leistungen — du hast diese Reife verdient.',p:['Reife','Ausdauer','Freude']},{e:'🌕',n:'Buck Moon — Juli',d:'28. Juli · Wassermann ♒',t:'Stärke und Erneuerung. Welche neue Version von dir zeigt sich gerade?',p:['Neugeburt','Stärke','Freiheit']},{e:'🌕',n:'Sturgeon Moon — August',d:'26. August · Fische ♓ ⭐ Supermond',t:'Erster Supermond! Überfluss und Weisheit. Manifestationskraft auf Hochtouren.',p:['Supermond','Überfluss','Weisheit']},{e:'🌕',n:'Harvest Moon — September',d:'24. September · Widder ♈ ⭐ Supermond',t:'Die Ernte des Jahres. Was hast du gesät? Zeit der Dankbarkeit und des Reapings.',p:['Ernte','Dankbarkeit','Reflexion']},{e:'🌕',n:"Hunter's Moon — Oktober",d:'24. Oktober · Stier ♉ ⭐ Supermond',t:'Fokus und Shadow Work. Kraftvolle Ahnen-Energie. Spirituelle Tiefe.',p:['Fokus','Shadow Work','Ahnen']},{e:'🌕',n:'Beaver Moon — November',d:'22. November · Zwillinge ♊ ⭐ Supermond',t:'Letzter Supermond! Fundamente für das nächste Jahr legen. Stärke dein inneres Haus.',p:['Vorbereitung','Fundament','Schutz']},{e:'🌕',n:'Cold Moon — Dezember',d:'22. Dezember · Krebs ♋',t:'Stille und Vollendung. Wintersonnenwende. Das Jahr mit Gnade und Dankbarkeit beenden.',p:['Vollendung','Stille','Dankbarkeit']}];
+const PROMPTS={m:['Was würde ich tun, wenn ich wüsste, dass ich nicht scheitern kann?','Beschreibe in allen sensorischen Details: Wie sieht dein Leben in einem Jahr aus?','Welches Glaubenssatz über Geld oder Erfolg hält mich noch davon ab, vollständig zu empfangen?','Was will das Universum mir durch meine aktuellen Herausforderungen geben?','Wenn Geld keine Rolle spielen würde, womit würde ich den nächsten Monat verbringen?','Welches Gefühl will ich durch meine Manifestationen am meisten erleben?','Wo in meinem Leben empfange ich mit Leichtigkeit — und wo kämpfe ich dagegen an?','Was sagt mein zukünftiges Ich zu dem, was ich gerade erschaffe?'],d:['Was verzögert sich gerade in meinem Leben — und was lerne ich in dieser Wartezeit?','Wann habe ich dem Timing des Universums vertraut — und wie hat es sich bewährt?','Wenn ich glauben würde, dass alles im richtigen Timing geschieht — was würde sich entspannen?','Welche Zeichen oder Synchronizitäten bemerke ich, die mich führen möchten?','Wo versuche ich, das Universum zu überholen, anstatt mit ihm zu tanzen?','Was ist der Unterschied zwischen göttlichem Timing und Aufschub in meinem Leben?','Was muss ich loslassen, um die nächste Ebene zu empfangen?'],s:['Welche Emotion habe ich diese Woche unterdrückt — und was möchte sie mir sagen?','Was kritisiere ich an anderen, das ich in mir selbst nicht sehen möchte?','Welche Version von mir ist mir peinlich — und was braucht sie von mir?','Welche alten Wunden trage ich, die ich noch nicht vollständig gewürdigt habe?','Gibt es eine Beziehung, in der ich Vergebung schenken oder empfangen muss?','Wenn meine stärkste Angst eine Botschaft hätte, was würde sie sagen?','Wann habe ich so gehandelt, dass es meinen Werten widersprach?'],g:['Liste 10 Dinge auf, für die du deinem Körper heute dankbar bist — ohne Vorbehalt.','Welche Herausforderung hat dich zu dem gemacht, wer du heute bist?','Welcher winzige Moment heute hat deine Seele wirklich genossen?','Wofür dankst du dem Universum — auch wenn du es noch nicht verstehst?','Was hat das Leben dir geschenkt, worum du nie explizit gebeten hast?','Welche Qualität an dir selbst erkennst du heute mit Dankbarkeit an?','Welche Person hat dich diesen Monat am meisten wachsen lassen?'],i:['Wer bin ich jenseits meiner Rollen, meines Berufs und meiner Beziehungen?','Was sind meine drei tiefsten Werte — und lebe ich wirklich nach ihnen?','Wenn niemand zuschauen würde — wie würde ich mein Leben anders gestalten?','Welche Aspekte meiner Persönlichkeit habe ich noch nicht vollständig umarmt?','Wie sieht ein Tag in meiner kühnsten, freiesten Version aus?','Welche Geschichte über mich selbst erzähle ich mir, die nicht wahr ist?','Was würde die 80-jährige Version von mir mir raten?'],r:['Schreibe einen Brief an das, was du loslässt — und danke ihm für das Gelernte.','Welche Überzeugung war einmal hilfreich, die ich aber jetzt nicht mehr brauche?','Welche Situation hält mich in einer alten Version von mir fest?','Wenn ich vollständig vergeben könnte — wem würde ich als erstes vergeben?','Was würde Platz schaffen in meinem Leben, meinem Geist oder meinem Herzen?','Welches Bedürfnis nach Kontrolle darf ich heute dem Universum übergeben?','Was habe ich dieses Jahr gelernt, das ich nun bereit bin, loszulassen?']};
+const AFFIRMATIONS=[{t:'Ich vertraue dem göttlichen Timing. Alles kommt genau dann, wenn es kommen soll.',a:'Divine Timing'},{t:'Ich bin ein kraftvoller Schöpfer. Meine Gedanken formen meine Realität.',a:'Manifestation'},{t:'Wohlstand fließt auf natürliche, freudige Weise zu mir.',a:'Abundanz'},{t:'Ich bin es wert, geliebt, gesehen und wertgeschätzt zu werden — genau so wie ich bin.',a:'Selbstwert'},{t:'Mein Körper ist weise, heilig und verdient liebevolle Fürsorge.',a:'Körper & Gesundheit'},{t:'Ich lasse los, was nicht mehr dient — mit Leichtigkeit und Dankbarkeit.',a:'Loslassen'},{t:'Ich bin mit dem Universum verbunden. Jeder Schritt führt mich näher zu meiner höchsten Version.',a:'Spiritualität'},{t:'2026 ist mein Jahr der Expansion, Freude und des Ausdrucks meiner tiefsten Wahrheit.',a:'Jahres-Affirmation'}];
+const ORACLE=[{s:'🌙',m:'Vertraue dem Prozess. Was jetzt still erscheint, wächst im Verborgenen. Das Universum arbeitet für dich, auch wenn du es nicht siehst.',h:'✦ Divine Timing ✦'},{s:'✦',m:'Du bist genau dort, wo du sein sollst. Dieser Moment ist kein Hindernis — er ist der Weg.',h:'✦ Gegenwärtigkeit ✦'},{s:'🔥',m:'Dein Feuer ist real. Schütze es, nähre es. Deine Leidenschaft ist ein heiliger Kompass.',h:'✦ Innere Kraft ✦'},{s:'🌊',m:'Fließe mit dem Leben, anstatt dagegen anzukämpfen. Wasser findet immer einen Weg — und so wirst du es auch.',h:'✦ Surrender ✦'},{s:'🦋',m:'Die Verwandlung, die du durchmachst, ist real. Die Raupe weiß nicht, dass sie Schmetterling wird — und trotzdem entsteht Flügelkraft.',h:'✦ Transformation ✦'},{s:'💎',m:'Du bist wertvoller, als du gerade glaubst. Behandle dich wie den Diamanten, der du bist.',h:'✦ Selbstwert ✦'},{s:'🌱',m:'Pflanze heute. Auch wenn du die Ernte nicht siehst — das Universum liebt einen Gärtner, der glaubt.',h:'✦ Glaube ✦'},{s:'☽',m:'In der Stille liegt die Antwort. Halte inne. Atme. Was weißt du bereits, das du dir noch nicht erlaubt hast zu wissen?',h:'✦ Intuition ✦'},{s:'🌸',m:'Schönheit erfordert keine Anstrengung — sie ist, was du bereits bist. Erlaube dir, gesehen zu werden.',h:'✦ Selbstliebe ✦'},{s:'⭐',m:'Deine Wünsche sind nicht zufällig. Das Universum hat sie in dein Herz gepflanzt, weil du der richtige Gefäß für sie bist.',h:'✦ Bestimmung ✦'},{s:'🌀',m:'Alles ist im Fluss. Was sich gerade auflöst, schafft Raum. Was sich zusammenfügt, hat seinen Grund.',h:'✦ Alles ist gut ✦'},{s:'🕊️',m:'Es ist Zeit zu vergeben — dir selbst zuerst. Aus dieser Freiheit entsteht Magie.',h:'✦ Vergebung ✦'}];
+const HABITS=['🧘 Meditation','✍️ Journaling','📖 Lesen','🌿 Bewegung','💧 Wasser 2L+','🌙 Mondpraxis','🙏 Dankbarkeit','🔮 Orakel-Karte'];
+const DAYS=['Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag','Sonntag'];
+
+function go(id){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.getElementById('nav-'+id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function st(id,btn){
+  const wrap=btn.closest('.sec, .pw');
+  wrap.querySelectorAll('.tpane').forEach(p=>p.classList.remove('active'));
+  btn.parentElement.querySelectorAll('.tbtn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  btn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+}
+
+function toggleAcc(hd){
+  const body=hd.nextElementSibling,isOpen=hd.classList.contains('open');
+  document.querySelectorAll('.acc-hd').forEach(h=>{h.classList.remove('open');h.nextElementSibling.classList.remove('open')});
+  if(!isOpen){hd.classList.add('open');body.classList.add('open')}
+}
+
+function buildMoons(){
+  const c=document.getElementById('moonList');
+  MOONS.forEach(m=>{
+    const d=document.createElement('div');d.className='moon-card';
+    d.innerHTML=`<div class="mc-top"><div class="mc-emoji">${m.e}</div><div><div class="mc-name">${m.n}</div><div class="mc-date">${m.d}</div></div></div><p class="mc-desc">${m.t}</p><div>${m.p.map(p=>`<span class="pill">${p}</span>`).join('')}</div>`;
+    c.appendChild(d);
+  });
+}
+
+function buildIntentions(){
+  const c=document.getElementById('intentionList');
+  MONTHS.forEach(m=>{
+    const d=document.createElement('div');d.className='acc-item';
+    d.innerHTML=`<div class="acc-hd" onclick="toggleAcc(this)"><div class="acc-title">${m.name} 2026</div><div class="acc-meta"><span class="acc-badge">${m.sign}</span><span class="acc-chev">▾</span></div></div><div class="acc-body"><p class="acc-moon">${m.moon}</p><p class="acc-theme">${m.theme}</p><div class="fg" style="margin-top:12px"><label class="fl">Meine Hauptintention</label><textarea class="fta" rows="2" placeholder="In ${m.name} beabsichtige ich…"></textarea></div><div class="fg"><label class="fl">Mein Fokuswort</label><input type="text" class="fi" placeholder="z.B. Vertrauen, Mut…"></div><div class="fg"><label class="fl">Was ich loslasse</label><textarea class="fta" rows="2" placeholder="Ich lasse los…"></textarea></div><div class="fg"><label class="fl">Wofür ich dankbar sein möchte</label><textarea class="fta" rows="2" placeholder="Ich werde dankbar sein für…"></textarea></div></div>`;
+    c.appendChild(d);
+  });
+}
+
+function buildPrompts(){
+  const map={m:'pml',d:'pdl',s:'psl',g:'pgl',i:'pil',r:'prl'};
+  Object.entries(map).forEach(([k,id])=>{
+    const c=document.getElementById(id);
+    PROMPTS[k].forEach((p,i)=>{
+      const d=document.createElement('div');d.className='prompt-item';
+      d.innerHTML=`<div class="pq"><div class="pnum">${String(i+1).padStart(2,'0')}</div><p class="ptxt">${p}</p></div><textarea class="fb" rows="3" placeholder="Schreibe hier deine Gedanken…"></textarea>`;
+      c.appendChild(d);
+    });
+  });
+}
+
+function buildHabits(){
+  const c=document.getElementById('habitList');
+  HABITS.forEach(h=>{
+    const d=document.createElement('div');d.className='hrow';
+    const dots=Array.from({length:30},(_,i)=>`<div class="dot" onclick="this.classList.toggle('done')" title="Tag ${i+1}">✓</div>`).join('');
+    d.innerHTML=`<div class="hname">${h}</div><div class="hdots">${dots}</div>`;
+    c.appendChild(d);
+  });
+}
+
+function buildGratitude(){
+  const c=document.getElementById('gratitudeList');
+  DAYS.forEach((day,i)=>{
+    const d=document.createElement('div');d.className='gday';
+    d.innerHTML=`<div class="gday-hd"><div class="gday-n">${String(i+1).padStart(2,'0')}</div><span class="gday-l">${day}</span></div><div class="gentries">${[1,2,3].map(()=>`<div class="gentry"><span class="gbullet">✦</span><input type="text" class="ginput" placeholder="Ich bin dankbar für…"></div>`).join('')}</div>`;
+    c.appendChild(d);
+  });
+}
+
+function buildAffirmations(){
+  const c=document.getElementById('affirmationList');
+  AFFIRMATIONS.forEach(a=>{
+    const d=document.createElement('div');d.className='acard';
+    d.innerHTML=`<p class="atxt">${a.t}</p><span class="aarea">✦ ${a.a}</span>`;
+    c.appendChild(d);
+  });
+}
+
+function drawOracle(){
+  const o=ORACLE[Math.floor(Math.random()*ORACLE.length)];
+  document.getElementById('osym').textContent=o.s;
+  document.getElementById('omsg').textContent=o.m;
+  document.getElementById('ohint').textContent=o.h;
+  document.getElementById('oreflect').style.display='block';
+}
+
+buildMoons();buildIntentions();buildPrompts();buildHabits();buildGratitude();buildAffirmations();
+</script>
+
+<script>
+// ─── SERVICE WORKER ───
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').then(reg => {
+      console.log('SW registered:', reg.scope);
+    }).catch(err => console.log('SW error:', err));
+  });
+}
+
+// ─── PWA INSTALL PROMPT ───
+let deferredPrompt = null;
+
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  const banner = document.getElementById('installBanner');
+  // Only show if not already dismissed
+  if (!localStorage.getItem('installDismissed')) {
+    banner.classList.add('show');
+    document.body.classList.add('banner-open');
+  }
+});
+
+window.addEventListener('appinstalled', () => {
+  document.getElementById('installBanner').classList.remove('show');
+  document.body.classList.remove('banner-open');
+  deferredPrompt = null;
+});
+
+function installApp() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(choice => {
+      deferredPrompt = null;
+      document.getElementById('installBanner').classList.remove('show');
+      document.body.classList.remove('banner-open');
+    });
+  } else {
+    // iOS / fallback — show instructions
+    alert('iOS: Tippe auf das Teilen-Symbol (□↑) und dann auf "Zum Home-Bildschirm". \n\nAndroid: Menü (⋮) → "Zum Startbildschirm hinzufügen".');
+  }
+}
+
+function closeBanner() {
+  document.getElementById('installBanner').classList.remove('show');
+  document.body.classList.remove('banner-open');
+  localStorage.setItem('installDismissed', '1');
+}
+
+// ─── iOS STANDALONE DETECTION ───
+if (window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
+  document.getElementById('installBanner').style.display = 'none';
+}
+
+// ─── LOCAL STORAGE PERSISTENCE ───
+const STORE_KEY = 'journal2026_data';
+
+function saveAll() {
+  const data = {};
+  // Save all textareas and inputs
+  document.querySelectorAll('textarea, input[type="text"], input[type="number"]').forEach((el, i) => {
+    const key = el.dataset.sid || ('el_' + i);
+    if (!el.dataset.sid) el.dataset.sid = key;
+    if (el.value) data[key] = el.value;
+  });
+  // Save all dot states
+  document.querySelectorAll('.dot').forEach((dot, i) => {
+    if (dot.classList.contains('done')) data['dot_' + i] = '1';
+  });
+  localStorage.setItem(STORE_KEY, JSON.stringify(data));
+}
+
+function loadAll() {
+  const raw = localStorage.getItem(STORE_KEY);
+  if (!raw) return;
+  try {
+    const data = JSON.parse(raw);
+    document.querySelectorAll('textarea, input[type="text"], input[type="number"]').forEach((el, i) => {
+      const key = el.dataset.sid || ('el_' + i);
+      if (!el.dataset.sid) el.dataset.sid = key;
+      if (data[key]) el.value = data[key];
+    });
+    document.querySelectorAll('.dot').forEach((dot, i) => {
+      if (data['dot_' + i]) dot.classList.add('done');
+    });
+  } catch(e) {}
+}
+
+// Auto-save on any input change (debounced)
+let saveTimer;
+document.addEventListener('input', () => {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(saveAll, 800);
+});
+
+// Also save on dot click
+document.addEventListener('click', e => {
+  if (e.target.classList.contains('dot')) {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(saveAll, 300);
+  }
+});
+
+// Load on startup — wait for dynamic content to render
+window.addEventListener('load', () => {
+  setTimeout(loadAll, 400);
+});
+
+// Offline indicator
+window.addEventListener('online', () => document.body.classList.remove('offline'));
+window.addEventListener('offline', () => document.body.classList.add('offline'));
+</script>
+
+</body>
+</html>
