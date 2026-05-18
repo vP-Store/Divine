@@ -1,8 +1,8 @@
 {
   "name": "Manifest & Divine Timing — Journal 2026",
   "short_name": "Journal 2026",
-  "description": "Dein heiliges digitales Manifestations-Journal für 2026 — mit Mondkalender, Ritualen, Journal-Prompts und Habit Tracker.",
-  ""start_url": "/",
+  "description": "Dein heiliges digitales Manifestations-Journal für 2026 – mit Mondkalender, Ritualen, Journal-Prompts und Habit Tracker.",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#1A1714",
   "theme_color": "#1A1714",
@@ -58,8 +58,5 @@
       "type": "image/png",
       "purpose": "any maskable"
     }
-  ],
-  "screenshots": [],
-  "related_applications": [],
-  "prefer_related_applications": false
+  ]
 }
